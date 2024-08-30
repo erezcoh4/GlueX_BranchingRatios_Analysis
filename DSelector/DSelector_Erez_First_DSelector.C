@@ -2,6 +2,7 @@
 
 void DSelector_Erez_First_DSelector::Init(TTree *locTree)
 {
+    Debug(2, "DSelector_Erez_First_DSelector::Init(TTree *locTree)");
 	// USERS: IN THIS FUNCTION, ONLY MODIFY SECTIONS WITH A "USER" OR "EXAMPLE" LABEL. LEAVE THE REST ALONE.
 
 	// The Init() function is called when the selector needs to initialize a new tree or chain.
@@ -127,11 +128,15 @@ void DSelector_Erez_First_DSelector::Init(TTree *locTree)
 	/************************************** DETERMINE IF ANALYZING SIMULATED DATA *************************************/
 
 	dIsMC = (dTreeInterface->Get_Branch("MCWeight") != NULL);
+    
+    Debug(2, "Done DSelector_Erez_First_DSelector::Init(TTree *locTree)");
 
 }
 
-Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry)
-{
+Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
+    
+    Debug(3, "DSelector_Erez_First_DSelector::Process( locEntry %ld)", locEntry );
+    
 	// The Process() function is called for each entry in the tree. The entry argument
 	// specifies which entry in the currently loaded tree is to be processed.
 	//
@@ -422,12 +427,13 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry)
 	if(!locIsEventCut && dOutputTreeFileName != "")
 		Fill_OutputTree();
 */
-
+    Debug(3, "Done DSelector_Erez_First_DSelector::Process( locEntry %ld) \n ------------------------", locEntry );
 	return kTRUE;
 }
 
 void DSelector_Erez_First_DSelector::Finalize(void)
 {
+    Debug(2, "DSelector_Erez_First_DSelector::Finalize(void)");
 	//Save anything to output here that you do not want to be in the default DSelector output ROOT file.
 
 	//Otherwise, don't do anything else (especially if you are using PROOF).
@@ -437,6 +443,23 @@ void DSelector_Erez_First_DSelector::Finalize(void)
 
 	//DO YOUR STUFF HERE
 
+    
 	//CALL THIS LAST
 	DSelector::Finalize(); //Saves results to the output file
+    Debug(2, "Done DSelector_Erez_First_DSelector::Finalize(void)");
+}
+
+
+// Oo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+void Debug(int _fdebug_, const char* fmt, ...) {
+    va_list arg;
+    va_start(arg, fmt);
+
+    if (fdebug > _fdebug_) {
+        vprintf(fmt, arg);
+        std::cout << std::endl;
+    }
+    //vprintf can be replaced with vsprintf (for sprintf behavior)
+    //or any other printf function preceded by a v
+    va_end(arg);
 }
