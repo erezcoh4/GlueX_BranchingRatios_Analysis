@@ -1,8 +1,15 @@
 #include "DSelector_Erez_First_DSelector.h"
+#include <stdio.h>
 
 void DSelector_Erez_First_DSelector::Init(TTree *locTree)
 {
-    Debug(2, "DSelector_Erez_First_DSelector::Init(TTree *locTree)");
+    Debug(2, "DSelector_Erez_First_DSelector::Init");
+    if (fdebug>2) std::cout << "TTree name: " << locTree->GetName() << std::endl;
+    csvfilename = "Erez_First_DSelector_output.csv" ;
+    csvfile.open( csvfilename );
+    csvfile << csvheader << std::endl;
+    csvfile.close();
+    
 	// USERS: IN THIS FUNCTION, ONLY MODIFY SECTIONS WITH A "USER" OR "EXAMPLE" LABEL. LEAVE THE REST ALONE.
 
 	// The Init() function is called when the selector needs to initialize a new tree or chain.
@@ -10,10 +17,10 @@ void DSelector_Erez_First_DSelector::Init(TTree *locTree)
 	// Init() will be called many times when running on PROOF (once per file to be processed).
 
 	//USERS: SET OUTPUT FILE NAME //can be overriden by user in PROOF
-	dOutputFileName = "Erez_First_DSelector.root"; //"" for none
+	dOutputFileName     = "Erez_First_DSelector.root"; //"" for none
 	dOutputTreeFileName = ""; //"" for none
-	dFlatTreeFileName = ""; //output flat tree (one combo per tree entry), "" for none
-	dFlatTreeName = ""; //if blank, default name will be chosen
+	dFlatTreeFileName   = ""; //output flat tree (one combo per tree entry), "" for none
+	dFlatTreeName       = ""; //if blank, default name will be chosen
 	//dSaveDefaultFlatBranches = true; // False: don't save default branches, reduce disk footprint.
 	//dSaveTLorentzVectorsAsFundamentaFlatTree = false; // Default (or false): save particles as TLorentzVector objects. True: save as four doubles instead.
 
@@ -134,7 +141,7 @@ void DSelector_Erez_First_DSelector::Init(TTree *locTree)
 }
 
 Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
-    std::cout << "fdebug: " << fdebug << std::endl;
+    
     Debug(3, "DSelector_Erez_First_DSelector::Process(locEntry %ld)", locEntry );
     
 	// The Process() function is called for each entry in the tree. The entry argument
@@ -152,6 +159,14 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
 	DSelector::Process(locEntry); //Gets the data from the tree for the entry
 	//cout << "RUN " << Get_RunNumber() << ", EVENT " << Get_EventNumber() << endl;
 	//TLorentzVector locProductionX4 = Get_X4_Production();
+    Debug(4,"run %d / entry %d", Get_RunNumber(), locEntry);
+    csvfile.open( csvfilename, std::io::app );
+    csvfile
+    << Get_RunNumber()      << ","
+    << Get_EventNumber()    << ","
+    << locEntry             << ","
+    << std::endl;
+    csvfile.close();
 
 	/******************************************** GET POLARIZATION ORIENTATION ******************************************/
 
@@ -207,6 +222,7 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
 	//Loop over combos
 	for(UInt_t loc_i = 0; loc_i < Get_NumCombos(); ++loc_i)
 	{
+        Debug(4, "combo %d", loc_i );
 		//Set branch array indices for combo and all combo particles
 		dComboWrapper->Set_ComboIndex(loc_i);
 
@@ -427,7 +443,7 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
 	if(!locIsEventCut && dOutputTreeFileName != "")
 		Fill_OutputTree();
 */
-    Debug(3, "Done DSelector_Erez_First_DSelector::Process( locEntry %ld) \n ------------------------", locEntry );
+    Debug(3, "Done DSelector_Erez_First_DSelector::Process(locEntry %ld) \n------------------------------------------", locEntry );
 	return kTRUE;
 }
 

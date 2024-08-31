@@ -9,10 +9,18 @@
 
 #include "TH1I.h"
 #include "TH2I.h"
+#include <stdio.h>
+
 
 class DSelector_Erez_First_DSelector : public DSelector
 {
 public:
+    
+    int   fdebug = 10;
+    std::string csvfilename;
+    ofstream    csvfile;
+    std::string csvheader = "run,event,entry,";
+    
     
     DSelector_Erez_First_DSelector(TTree* locTree = NULL) : DSelector(locTree){}
     virtual ~DSelector_Erez_First_DSelector(){}
@@ -21,8 +29,6 @@ public:
     Bool_t Process(Long64_t entry);
     
     
-    
-    int   fdebug = 10;
     
     void  Debug (int _fdebug_, const char* fmt, ...);
     
