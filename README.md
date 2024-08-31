@@ -37,6 +37,13 @@ GlueX software help:
 https://groups.google.com/g/gluex-software
 
 
+### **(2.2.1) Execute DSelector
+
+</ cd /work/hallb/clas12/users/ecohen/halld/GlueX/GlueX_BranchingRatios_Analysis/DSelector/ >
+</ root -l ../../tree_gd_pi0pimprotinc__B4_F4_T2_S2_090206.root >
+</ .x $(ROOT_ANALYSIS_HOME)/scripts/Load_DSelector.C >
+</ gd_pi0pimprotinc__B4_F4_T2_S2_Tree->Process("DSelector_Erez_First_DSelector.C+") >
+
 
 
 # **(3) Data** 

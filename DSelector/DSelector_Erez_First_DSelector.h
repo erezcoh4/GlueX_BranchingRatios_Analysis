@@ -21,9 +21,10 @@ public:
     Bool_t Process(Long64_t entry);
     
     
-    int fdebug = 2;
     
-    void            Debug (int _fdebug_, const char* fmt, ...);
+    int   fdebug = 2;
+    
+    void  Debug (int _fdebug_, const char* fmt, ...);
     
 private:
     

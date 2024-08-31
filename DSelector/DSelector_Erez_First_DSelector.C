@@ -451,7 +451,7 @@ void DSelector_Erez_First_DSelector::Finalize(void)
 
 
 // Oo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
-void Debug(int _fdebug_, const char* fmt, ...) {
+void DSelector_Erez_First_DSelector::Debug(int _fdebug_, const char* fmt, ...) {
     va_list arg;
     va_start(arg, fmt);
 
