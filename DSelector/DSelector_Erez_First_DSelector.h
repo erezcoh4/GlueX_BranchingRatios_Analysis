@@ -14,7 +14,7 @@ class DSelector_Erez_First_DSelector : public DSelector
 {
 public:
     
-    DSelector_Erez_First_DSelector(TTree* locTree = NULL) : DSelector(locTree){}
+    DSelector_Erez_First_DSelector(TTree* locTree = NULL, int fdebug=0) : DSelector(locTree){}
     virtual ~DSelector_Erez_First_DSelector(){}
     
     void Init(TTree *tree);

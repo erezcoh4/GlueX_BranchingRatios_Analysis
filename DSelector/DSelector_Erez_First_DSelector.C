@@ -1,6 +1,7 @@
 #include "DSelector_Erez_First_DSelector.h"
 
-void DSelector_Erez_First_DSelector::Init(TTree *locTree)
+void DSelector_Erez_First_DSelector::Init(TTree *locTree, int _fdebug_),
+fdebug(_fdebug_)
 {
     Debug(2, "DSelector_Erez_First_DSelector::Init(TTree *locTree)");
 	// USERS: IN THIS FUNCTION, ONLY MODIFY SECTIONS WITH A "USER" OR "EXAMPLE" LABEL. LEAVE THE REST ALONE.
