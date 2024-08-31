@@ -17,9 +17,9 @@ class DSelector_Erez_First_DSelector : public DSelector
 public:
     
     int   fdebug = 10;
-    std::string csvfilename;
-    ofstream    csvfile;
-    std::string csvheader = "run,event,entry,";
+    std::string     csvfilename;
+    std::ofstream   csvfile;
+    std::string     csvheader = "run,event,entry,";
     
     
     DSelector_Erez_First_DSelector(TTree* locTree = NULL) : DSelector(locTree){}
