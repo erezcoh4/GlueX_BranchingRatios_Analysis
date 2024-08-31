@@ -160,13 +160,6 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
 	//cout << "RUN " << Get_RunNumber() << ", EVENT " << Get_EventNumber() << endl;
 	//TLorentzVector locProductionX4 = Get_X4_Production();
     Debug(4,"run %d / entry %d", Get_RunNumber(), locEntry);
-    csvfile.open( csvfilename, std::ios::app );
-    csvfile
-    << Get_RunNumber()      << ","
-    << Get_EventNumber()    << ","
-    << locEntry             << ","
-    << std::endl;
-    csvfile.close();
 
 	/******************************************** GET POLARIZATION ORIENTATION ******************************************/
 
@@ -378,6 +371,18 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
 
 		//FILL FLAT TREE
 		//Fill_FlatTree(); //for the active combo
+        
+        int idx_combo = (int)loc_i;        
+        csvfile.open( csvfilename, std::ios::app );
+        csvfile
+        << Get_RunNumber()      << ","
+        << Get_EventNumber()    << ","
+        << locEntry             << ","
+        << idx_combo            << ","
+        << std::endl;
+        csvfile.close();
+
+        
 	} // end of combo loop
 
 	//FILL HISTOGRAMS: Num combos / events surviving actions

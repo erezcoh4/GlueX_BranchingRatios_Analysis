@@ -19,7 +19,7 @@ public:
     int   fdebug = 10;
     std::string     csvfilename;
     std::ofstream   csvfile;
-    std::string     csvheader = "run,event,entry,";
+    std::string     csvheader = "run,event,entry,combo,";
     
     
     DSelector_Erez_First_DSelector(TTree* locTree = NULL) : DSelector(locTree){}
