@@ -134,8 +134,8 @@ void DSelector_Erez_First_DSelector::Init(TTree *locTree)
 }
 
 Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
-    
-    Debug(3, "DSelector_Erez_First_DSelector::Process( locEntry %ld)", locEntry );
+    std::cout << "fdebug: " << fdebug << std::endl;
+    Debug(3, "DSelector_Erez_First_DSelector::Process(locEntry %ld)", locEntry );
     
 	// The Process() function is called for each entry in the tree. The entry argument
 	// specifies which entry in the currently loaded tree is to be processed.
