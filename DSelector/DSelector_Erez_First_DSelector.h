@@ -22,7 +22,7 @@ public:
     
     
     
-    int   fdebug = 2;
+    int   fdebug = 5;
     
     void  Debug (int _fdebug_, const char* fmt, ...);
     
