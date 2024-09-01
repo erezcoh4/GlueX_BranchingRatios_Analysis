@@ -266,7 +266,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 		Double_t locBunchPeriod = dAnalysisUtilities.Get_BeamBunchPeriod(Get_RunNumber());
 		 Double_t locDeltaT_RF = dAnalysisUtilities.Get_DeltaT_RF(Get_RunNumber(), locBeamX4_Measured, dComboWrapper);
 		 Int_t locRelBeamBucket = dAnalysisUtilities.Get_RelativeBeamBucket(Get_RunNumber(), locBeamX4_Measured, dComboWrapper); // 0 for in-time events, non-zero integer for out-of-time photons
-		 Int_t locNumOutOfTimeBunchesInTree = 5; //YOU need to specify this number
+		 Int_t locNumOutOfTimeBunchesInTree = 20; //YOU need to specify this number
 			//Number of out-of-time beam bunches in tree (on a single side, so that total number out-of-time bunches accepted is 2 times this number for left + right bunches) 
 
 		 Bool_t locSkipNearestOutOfTimeBunch = true; // True: skip events from nearest out-of-time bunch on either side (recommended).
