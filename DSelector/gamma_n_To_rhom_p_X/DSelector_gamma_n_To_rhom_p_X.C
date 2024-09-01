@@ -263,8 +263,8 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 		/********************************************* GET COMBO RF TIMING INFO *****************************************/
 
 		TLorentzVector locBeamX4_Measured = dComboBeamWrapper->Get_X4_Measured();
-		//Double_t locBunchPeriod = dAnalysisUtilities.Get_BeamBunchPeriod(Get_RunNumber());
-		// Double_t locDeltaT_RF = dAnalysisUtilities.Get_DeltaT_RF(Get_RunNumber(), locBeamX4_Measured, dComboWrapper);
+		Double_t locBunchPeriod = dAnalysisUtilities.Get_BeamBunchPeriod(Get_RunNumber());
+		 Double_t locDeltaT_RF = dAnalysisUtilities.Get_DeltaT_RF(Get_RunNumber(), locBeamX4_Measured, dComboWrapper);
 		// Int_t locRelBeamBucket = dAnalysisUtilities.Get_RelativeBeamBucket(Get_RunNumber(), locBeamX4_Measured, dComboWrapper); // 0 for in-time events, non-zero integer for out-of-time photons
 		// Int_t locNumOutOfTimeBunchesInTree = XXX; //YOU need to specify this number
 			//Number of out-of-time beam bunches in tree (on a single side, so that total number out-of-time bunches accepted is 2 times this number for left + right bunches) 
@@ -376,14 +376,40 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 		//FILL FLAT TREE
 		//Fill_FlatTree(); //for the active combo
         
+        
+        Debug(4,"run %d / event %d / entry %d", Get_RunNumber(), Get_EventNumber(), locEntry);
+        
         // fill output csvfile
-        int idx_combo = (int)loc_i;        
+        int     idx_combo = (int)loc_i;
+        int    run_number = (int)Get_RunNumber();
+        int    evt_number = (int)Get_EventNumber();
+        int  entry_number = (int)locEntry
+        Double_t locBunchPeriod = dAnalysisUtilities.Get_BeamBunchPeriod(Get_RunNumber());
+         Double_t locDeltaT_RF = dAnalysisUtilities.Get_DeltaT_RF(Get_RunNumber(), locBeamX4_Measured, dComboWrapper);
+
+        if (fdebug>4){
+            std::cout
+            << "run "               << run_number           << ","
+            << "event "             << evt_number           << ","
+            << "entry "             << entry_number         << ","
+            << "combo "             << idx_combo            << ","
+            << std::endl
+            << "E(gamma): "         << E_gamma              << " GeV,"
+            << std::endl
+            << "locBunchPeriod: "   << locBunchPeriod       << ","
+            << "locDeltaT_RF: "     << locDeltaT_RF         << " ns,"
+            << std::endl;
+        }
+        
         csvfile.open( csvfilename, std::ios::app );
         csvfile
-        << Get_RunNumber()      << ","
-        << Get_EventNumber()    << ","
-        << locEntry             << ","
+        << run_number           << ","
+        << evt_number           << ","
+        << entry_number         << ","
         << idx_combo            << ","
+        << E_gamma              << ","
+        << locBunchPeriod       << ","
+        << locDeltaT_RF         << ","
         << std::endl;
         csvfile.close();
 
@@ -453,6 +479,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 	if(!locIsEventCut && dOutputTreeFileName != "")
 		Fill_OutputTree();
 */
+    
     Debug(3, "Done DSelector_gamma_n_To_rhom_p_X::Process(locEntry %ld) \n------------------------------------------", locEntry );
     if (locEntry >= NEntriesToProcess) { Debug(0,"Exiting after %d entries\nDone\n", NEntriesToProcess); gSystem->Exit(0); }
 	return kTRUE;

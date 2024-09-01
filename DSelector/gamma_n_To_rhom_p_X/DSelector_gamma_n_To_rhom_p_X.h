@@ -25,7 +25,7 @@ public:
     int     NEntriesToProcess = 20;
     std::string     csvfilename;
     std::ofstream   csvfile;
-    std::string     csvheader = "run,event,entry,combo,E_gamma,";
+    std::string     csvheader = "run,event,entry,combo,E_gamma,locBunchPeriod,locDeltaT_RF,";
     
     
     DSelector_gamma_n_To_rhom_p_X(TTree* locTree = NULL) : DSelector(locTree){}
