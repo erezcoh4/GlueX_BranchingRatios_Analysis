@@ -163,7 +163,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
     Debug(4,"run %d / event %d / entry %d", Get_RunNumber(), Get_EventNumber(), locEntry);
 
 	/******************************************** GET POLARIZATION ORIENTATION ******************************************/
-
+    Debug(5,"GET POLARIZATION ORIENTATION");
 	//Only if the run number changes
 	//RCDB environment must be setup in order for this to work! (Will return false otherwise)
 	UInt_t locRunNumber = Get_RunNumber();
@@ -174,7 +174,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 	}
 
 	/********************************************* SETUP UNIQUENESS TRACKING ********************************************/
-
+    Debug(5,"SETUP UNIQUENESS TRACKING");
 	//ANALYSIS ACTIONS: Reset uniqueness tracking for each action
 	//For any actions that you are executing manually, be sure to call Reset_NewEvent() on them here
 	Reset_Actions_NewEvent();
@@ -212,7 +212,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 	*/
 
 	/************************************************* LOOP OVER COMBOS *************************************************/
-
+    Debug(5,"LOOP OVER COMBOS");
 	//Loop over combos
 	for(UInt_t loc_i = 0; loc_i < Get_NumCombos(); ++loc_i)
 	{
