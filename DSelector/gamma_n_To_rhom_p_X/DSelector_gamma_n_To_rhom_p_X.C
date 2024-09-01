@@ -383,9 +383,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
         int     idx_combo = (int)loc_i;
         int    run_number = (int)Get_RunNumber();
         int    evt_number = (int)Get_EventNumber();
-        int  entry_number = (int)locEntry
-        Double_t locBunchPeriod = dAnalysisUtilities.Get_BeamBunchPeriod(Get_RunNumber());
-         Double_t locDeltaT_RF = dAnalysisUtilities.Get_DeltaT_RF(Get_RunNumber(), locBeamX4_Measured, dComboWrapper);
+        int  entry_number = (int)locEntry;
 
         if (fdebug>4){
             std::cout
