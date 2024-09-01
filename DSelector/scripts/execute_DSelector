@@ -32,6 +32,6 @@ ROOT.gSystem.Load("$(ROOT_ANALYSIS_HOME)/$(BMS_OSNAME)/lib/libDSelector.so");
 inFileName = "../tree_gd_pi0pimprotinc__B4_F4_T2_S2_090206.root"
 inFile = ROOT.TFile.Open(inFileName ,"READ")
 inTree = inFile.Get("gd_pi0pimprotinc__B4_F4_T2_S2_Tree")
-inTree.Process("DSelector_gamma_n_To_rhom_p_X.C+")
+inTree.Process("DSelector/gamma_n_To_rhom_p_X/DSelector_gamma_n_To_rhom_p_X.C+")
 
 
