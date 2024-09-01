@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# Execute DSelector
+#
+# example usage:
+#
+# ./DSelector/scripts
+#
+
+
+
+import sys, os, argparse
+import numpy as np, pandas as pd
+import matplotlib.pyplot as plt
+import ROOT
+
+
+parser = argparse.ArgumentParser(description='Execute DSelector')
+parser.add_argument("--time", type=float,     default=1, required=False, help="Acquisition time (in seconds)")
+args = parser.parse_args()
+
+intervaltime= args.time
+
+
+
+.x $(ROOT_ANALYSIS_HOME)/scripts/Load_DSelector.C
+
+
+
+inFileName = "../../tree_gd_pi0pimprotinc__B4_F4_T2_S2_090206.root"
+inFile = ROOT.TFile.Open(inFileName ,"READ")
+inTree = inFile.Get("tree_gd_pi0pimprotinc__B4_F4_T2_S2")
+inTree.Process("DSelector_gamma_n_To_rhom_p_X.C+")
+
+

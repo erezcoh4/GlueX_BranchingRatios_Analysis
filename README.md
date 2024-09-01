@@ -1,4 +1,4 @@
-Last update Aug-30, 2024
+Last update Sep-1, 2024
 
 
 # **(1) General**
@@ -43,6 +43,7 @@ https://groups.google.com/g/gluex-software
 </ root -l ../../tree_gd_pi0pimprotinc__B4_F4_T2_S2_090206.root >
 </ .x $(ROOT_ANALYSIS_HOME)/scripts/Load_DSelector.C >
 </ gd_pi0pimprotinc__B4_F4_T2_S2_Tree->Process("DSelector_Erez_First_DSelector.C+") >
+
 
 
 
@@ -348,6 +349,17 @@ The output of the DSelector is what we call a “flat” tree. This means is has
   thrownU
  
 
+# Dictionary
+--------------------------------------------------------
+    
+    deque       double-ended queue, a data type that generalizes a queue; elements can be added or removed from either the head or tail
+    
+    combo
+    
+    
+    
+# arxiv
+--------------------------------------------------------
 
 ## Questions to Jackson, Aug - 2024  
 --------------------------------------------------------

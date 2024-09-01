@@ -1,14 +1,10 @@
-#include "DSelector_Erez_First_DSelector.h"
+#include "DSelector_gamma_n_To_rhom_p_X.h"
 #include <stdio.h>
 
-void DSelector_Erez_First_DSelector::Init(TTree *locTree)
+void DSelector_gamma_n_To_rhom_p_X::Init(TTree *locTree)
 {
-    Debug(2, "DSelector_Erez_First_DSelector::Init");
+    Debug(2, "DSelector_gamma_n_To_rhom_p_X::Init");
     if (fdebug>2) std::cout << "TTree name: " << locTree->GetName() << std::endl;
-    csvfilename = "Erez_First_DSelector_output.csv" ;
-    csvfile.open( csvfilename );
-    csvfile << csvheader << std::endl;
-    csvfile.close();
     
 	// USERS: IN THIS FUNCTION, ONLY MODIFY SECTIONS WITH A "USER" OR "EXAMPLE" LABEL. LEAVE THE REST ALONE.
 
@@ -36,6 +32,11 @@ void DSelector_Erez_First_DSelector::Init(TTree *locTree)
 	dPreviousRunNumber = 0;
 
 	/*********************************** EXAMPLE USER INITIALIZATION: ANALYSIS ACTIONS **********************************/
+    csvfilename = "Erez_First_DSelector_output.csv" ;
+    csvfile.open( csvfilename );
+    csvfile << csvheader << std::endl;
+    csvfile.close();
+    
 
 	// EXAMPLE: Create deque for histogramming particle masses:
 	// // For histogramming the phi mass in phi -> K+ K-
@@ -136,13 +137,13 @@ void DSelector_Erez_First_DSelector::Init(TTree *locTree)
 
 	dIsMC = (dTreeInterface->Get_Branch("MCWeight") != NULL);
     
-    Debug(2, "Done DSelector_Erez_First_DSelector::Init(TTree *locTree)");
+    Debug(2, "Done DSelector_gamma_n_To_rhom_p_X::Init(TTree *locTree)");
 
 }
 
-Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
+Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
     
-    Debug(3, "DSelector_Erez_First_DSelector::Process(locEntry %ld)", locEntry );
+    Debug(3, "DSelector_gamma_n_To_rhom_p_X::Process(locEntry %ld)", locEntry );
     
 	// The Process() function is called for each entry in the tree. The entry argument
 	// specifies which entry in the currently loaded tree is to be processed.
@@ -159,7 +160,7 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
 	DSelector::Process(locEntry); //Gets the data from the tree for the entry
 	//cout << "RUN " << Get_RunNumber() << ", EVENT " << Get_EventNumber() << endl;
 	//TLorentzVector locProductionX4 = Get_X4_Production();
-    Debug(4,"run %d / entry %d", Get_RunNumber(), locEntry);
+    Debug(4,"run %d / event %d / entry %d", Get_RunNumber(), Get_EventNumber(), locEntry);
 
 	/******************************************** GET POLARIZATION ORIENTATION ******************************************/
 
@@ -372,6 +373,7 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
 		//FILL FLAT TREE
 		//Fill_FlatTree(); //for the active combo
         
+        // fill output csvfile
         int idx_combo = (int)loc_i;        
         csvfile.open( csvfilename, std::ios::app );
         csvfile
@@ -448,13 +450,13 @@ Bool_t DSelector_Erez_First_DSelector::Process(Long64_t locEntry) {
 	if(!locIsEventCut && dOutputTreeFileName != "")
 		Fill_OutputTree();
 */
-    Debug(3, "Done DSelector_Erez_First_DSelector::Process(locEntry %ld) \n------------------------------------------", locEntry );
+    Debug(3, "Done DSelector_gamma_n_To_rhom_p_X::Process(locEntry %ld) \n------------------------------------------", locEntry );
 	return kTRUE;
 }
 
-void DSelector_Erez_First_DSelector::Finalize(void)
+void DSelector_gamma_n_To_rhom_p_X::Finalize(void)
 {
-    Debug(2, "DSelector_Erez_First_DSelector::Finalize(void)");
+    Debug(2, "DSelector_gamma_n_To_rhom_p_X::Finalize(void)");
 	//Save anything to output here that you do not want to be in the default DSelector output ROOT file.
 
 	//Otherwise, don't do anything else (especially if you are using PROOF).
@@ -467,12 +469,12 @@ void DSelector_Erez_First_DSelector::Finalize(void)
     
 	//CALL THIS LAST
 	DSelector::Finalize(); //Saves results to the output file
-    Debug(2, "Done DSelector_Erez_First_DSelector::Finalize(void)");
+    Debug(2, "Done DSelector_gamma_n_To_rhom_p_X::Finalize(void)");
 }
 
 
 // Oo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
-void DSelector_Erez_First_DSelector::Debug(int _fdebug_, const char* fmt, ...) {
+void DSelector_gamma_n_To_rhom_p_X::Debug(int _fdebug_, const char* fmt, ...) {
     va_list arg;
     va_start(arg, fmt);
 
