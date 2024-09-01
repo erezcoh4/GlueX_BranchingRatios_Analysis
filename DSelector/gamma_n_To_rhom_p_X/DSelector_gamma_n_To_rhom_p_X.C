@@ -32,7 +32,7 @@ void DSelector_gamma_n_To_rhom_p_X::Init(TTree *locTree)
 	dPreviousRunNumber = 0;
 
 	/*********************************** EXAMPLE USER INITIALIZATION: ANALYSIS ACTIONS **********************************/
-    csvfilename = "Erez_First_DSelector_output.csv" ;
+    csvfilename = "DSelector_gamma_n_To_rhom_p_X_output.csv" ;
     csvfile.open( csvfilename );
     csvfile << csvheader << std::endl;
     csvfile.close();
