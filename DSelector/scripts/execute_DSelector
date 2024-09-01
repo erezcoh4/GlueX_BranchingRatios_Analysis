@@ -29,6 +29,7 @@ ROOT.gSystem.Load("$(ROOT_ANALYSIS_HOME)/$(BMS_OSNAME)/lib/libDSelector.so");
 
 
 os.chdir("/w/hallb-scshelf2102/clas12/users/ecohen/halld/GlueX/GlueX_BranchingRatios_Analysis/DSelector/gamma_n_To_rhom_p_X")
+print(os.pwd())
 inFileName = "../../../tree_gd_pi0pimprotinc__B4_F4_T2_S2_090206.root"
 inFile = ROOT.TFile.Open(inFileName ,"READ")
 inTree = inFile.Get("gd_pi0pimprotinc__B4_F4_T2_S2_Tree")
