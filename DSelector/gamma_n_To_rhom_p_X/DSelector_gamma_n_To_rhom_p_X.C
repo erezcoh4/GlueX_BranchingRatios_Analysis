@@ -317,6 +317,9 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 			//dHist_BeamEnergy->Fill(locBeamP4.E(),locHistAccidWeightFactor); // Alternate version with accidental subtraction
 
 			locUsedSoFar_BeamEnergy.insert(locBeamID);
+            
+            double E_gamma = locBeamP4.E();
+            Debug(4, "Beam energy: %.1f GeV", E_gamma)
 		}
 
 		/************************************ EXAMPLE: HISTOGRAM MISSING MASS SQUARED ************************************/
@@ -452,6 +455,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 		Fill_OutputTree();
 */
     Debug(3, "Done DSelector_gamma_n_To_rhom_p_X::Process(locEntry %ld) \n------------------------------------------", locEntry );
+    if (locEntry > NEntriesToProcess) {return kFalse;}
 	return kTRUE;
 }
 
