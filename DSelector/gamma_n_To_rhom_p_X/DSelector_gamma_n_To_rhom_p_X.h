@@ -22,7 +22,7 @@ class DSelector_gamma_n_To_rhom_p_X : public DSelector
 public:
     
     int                fdebug = 10;
-    int     NEntriesToProcess = 34;
+    int     NEntriesToProcess = 20;
     std::string     csvfilename;
     std::ofstream   csvfile;
     std::string     csvheader = "run,event,entry,combo,E_gamma,";

@@ -454,7 +454,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 		Fill_OutputTree();
 */
     Debug(3, "Done DSelector_gamma_n_To_rhom_p_X::Process(locEntry %ld) \n------------------------------------------", locEntry );
-    if (locEntry > NEntriesToProcess) {gSystem->Exit(0);}
+    if (locEntry > NEntriesToProcess) { gSystem->Exit(0); }
 	return kTRUE;
 }
 
