@@ -265,20 +265,20 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 		TLorentzVector locBeamX4_Measured = dComboBeamWrapper->Get_X4_Measured();
 		Double_t locBunchPeriod = dAnalysisUtilities.Get_BeamBunchPeriod(Get_RunNumber());
 		 Double_t locDeltaT_RF = dAnalysisUtilities.Get_DeltaT_RF(Get_RunNumber(), locBeamX4_Measured, dComboWrapper);
-		// Int_t locRelBeamBucket = dAnalysisUtilities.Get_RelativeBeamBucket(Get_RunNumber(), locBeamX4_Measured, dComboWrapper); // 0 for in-time events, non-zero integer for out-of-time photons
+		 Int_t locRelBeamBucket = dAnalysisUtilities.Get_RelativeBeamBucket(Get_RunNumber(), locBeamX4_Measured, dComboWrapper); // 0 for in-time events, non-zero integer for out-of-time photons
 		// Int_t locNumOutOfTimeBunchesInTree = XXX; //YOU need to specify this number
 			//Number of out-of-time beam bunches in tree (on a single side, so that total number out-of-time bunches accepted is 2 times this number for left + right bunches) 
 
 		// Bool_t locSkipNearestOutOfTimeBunch = true; // True: skip events from nearest out-of-time bunch on either side (recommended).
 		// Int_t locNumOutOfTimeBunchesToUse = locSkipNearestOutOfTimeBunch ? locNumOutOfTimeBunchesInTree-1:locNumOutOfTimeBunchesInTree; 
-		// Double_t locAccidentalScalingFactor = dAnalysisUtilities.Get_AccidentalScalingFactor(Get_RunNumber(), locBeamP4.E(), dIsMC); // Ideal value would be 1, but deviations require added factor, which is different for data and MC.
-		// Double_t locAccidentalScalingFactorError = dAnalysisUtilities.Get_AccidentalScalingFactorError(Get_RunNumber(), locBeamP4.E()); // Ideal value would be 1, but deviations observed, need added factor.
-		// Double_t locHistAccidWeightFactor = locRelBeamBucket==0 ? 1 : -locAccidentalScalingFactor/(2*locNumOutOfTimeBunchesToUse) ; // Weight by 1 for in-time events, ScalingFactor*(1/NBunches) for out-of-time
+		 Double_t locAccidentalScalingFactor = dAnalysisUtilities.Get_AccidentalScalingFactor(Get_RunNumber(), locBeamP4.E(), dIsMC); // Ideal value would be 1, but deviations require added factor, which is different for data and MC.
+		 Double_t locAccidentalScalingFactorError = dAnalysisUtilities.Get_AccidentalScalingFactorError(Get_RunNumber(), locBeamP4.E()); // Ideal value would be 1, but deviations observed, need added factor.
+		 Double_t locHistAccidWeightFactor = locRelBeamBucket==0 ? 1 : -locAccidentalScalingFactor/(2*locNumOutOfTimeBunchesToUse) ; // Weight by 1 for in-time events, ScalingFactor*(1/NBunches) for out-of-time
 		// if(locSkipNearestOutOfTimeBunch && abs(locRelBeamBucket)==1) { // Skip nearest out-of-time bunch: tails of in-time distribution also leak in
 		// 	dComboWrapper->Set_IsComboCut(true); 
 		// 	continue; 
 		// } 
-
+        
 		/********************************************* COMBINE FOUR-MOMENTUM ********************************************/
 
 		// DO YOUR STUFF HERE
@@ -316,7 +316,6 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 		{
 			dHist_BeamEnergy->Fill(locBeamP4.E()); // Fills in-time and out-of-time beam photon combos
 			//dHist_BeamEnergy->Fill(locBeamP4.E(),locHistAccidWeightFactor); // Alternate version with accidental subtraction
-
 			locUsedSoFar_BeamEnergy.insert(locBeamID);
 		}
         Debug(4, "Beam energy: %.1f GeV", E_gamma);
@@ -387,15 +386,23 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 
         if (fdebug>4){
             std::cout
-            << "run "               << run_number           << ","
-            << "event "             << evt_number           << ","
-            << "entry "             << entry_number         << ","
-            << "combo "             << idx_combo            << ","
+            << "run "                               << run_number           << ", "
+            << "event "                             << evt_number           << ", "
+            << "entry "                             << entry_number         << ", "
+            << "combo "                             << idx_combo            << ", "
             << std::endl
-            << "E(gamma): "         << E_gamma              << " GeV,"
+            << "E(gamma): "                         << E_gamma              << " GeV, "
             << std::endl
-            << "locBunchPeriod: "   << locBunchPeriod       << ","
-            << "locDeltaT_RF: "     << locDeltaT_RF         << " ns,"
+            << "locDeltaT_RF: "                     << locDeltaT_RF         << " ns, "
+            // Relative beam bucket
+            // 0 for in-time events, non-zero integer for out-of-time photons
+            << "locRelBeamBucket: "                 << locRelBeamBucket     << ", "
+            // Accidental scaling factor
+            // Ideal value would be 1, but deviations require added factor, which is different for data and MC.
+            << "locAccidentalScalingFactor: "       << locAccidentalScalingFactor           << ", "
+            << "locAccidentalScalingFactorError: "  << locAccidentalScalingFactorError      << ", "
+            // Weight by 1 for in-time events, ScalingFactor*(1/NBunches) for out-of-time
+            << "locHistAccidWeightFactor: "         << locHistAccidWeightFactor             << ", "
             << std::endl;
         }
         
@@ -406,7 +413,6 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
         << entry_number         << ","
         << idx_combo            << ","
         << E_gamma              << ","
-        << locBunchPeriod       << ","
         << locDeltaT_RF         << ","
         << std::endl;
         csvfile.close();
