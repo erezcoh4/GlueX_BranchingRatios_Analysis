@@ -21,7 +21,7 @@ class DSelector_gamma_n_To_rhom_p_X : public DSelector
 {
 public:
     
-    int                fdebug = 10;
+    int                fdebug = 5;
     int     NEntriesToProcess = 20;
     std::string     csvfilename;
     std::ofstream   csvfile;

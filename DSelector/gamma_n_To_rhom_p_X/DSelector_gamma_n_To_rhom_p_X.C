@@ -161,7 +161,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 	DSelector::Process(locEntry); //Gets the data from the tree for the entry
 	//cout << "RUN " << Get_RunNumber() << ", EVENT " << Get_EventNumber() << endl;
 	//TLorentzVector locProductionX4 = Get_X4_Production();
-    Debug(4,"run %d / event %d / entry %d", Get_RunNumber(), Get_EventNumber(), locEntry);
+    Debug(6,"run %d / event %d / entry %d", Get_RunNumber(), Get_EventNumber(), locEntry);
 
 	/******************************************** GET POLARIZATION ORIENTATION ******************************************/
     
@@ -403,6 +403,8 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
             << "locAccidentalScalingFactorError: "  << locAccidentalScalingFactorError      << ", "
             // Weight by 1 for in-time events, ScalingFactor*(1/NBunches) for out-of-time
             << "locHistAccidWeightFactor: "         << locHistAccidWeightFactor             << ", "
+            << std::endl
+            << "................................................................"
             << std::endl;
         }
         
