@@ -157,14 +157,14 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 	// The return value is currently not used.
 
 	//CALL THIS FIRST
-    Debug(5,"CALL THIS FIRST");
+    
 	DSelector::Process(locEntry); //Gets the data from the tree for the entry
 	//cout << "RUN " << Get_RunNumber() << ", EVENT " << Get_EventNumber() << endl;
 	//TLorentzVector locProductionX4 = Get_X4_Production();
     Debug(4,"run %d / event %d / entry %d", Get_RunNumber(), Get_EventNumber(), locEntry);
 
 	/******************************************** GET POLARIZATION ORIENTATION ******************************************/
-    Debug(5,"GET POLARIZATION ORIENTATION");
+    
 	//Only if the run number changes
 	//RCDB environment must be setup in order for this to work! (Will return false otherwise)
 	UInt_t locRunNumber = Get_RunNumber();
@@ -175,7 +175,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 	}
 
 	/********************************************* SETUP UNIQUENESS TRACKING ********************************************/
-    Debug(5,"SETUP UNIQUENESS TRACKING");
+    
 	//ANALYSIS ACTIONS: Reset uniqueness tracking for each action
 	//For any actions that you are executing manually, be sure to call Reset_NewEvent() on them here
 	Reset_Actions_NewEvent();
@@ -213,7 +213,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 	*/
 
 	/************************************************* LOOP OVER COMBOS *************************************************/
-    Debug(5,"LOOP OVER COMBOS");
+    
 	//Loop over combos
 	for(UInt_t loc_i = 0; loc_i < Get_NumCombos(); ++loc_i)
 	{
@@ -454,7 +454,7 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
 		Fill_OutputTree();
 */
     Debug(3, "Done DSelector_gamma_n_To_rhom_p_X::Process(locEntry %ld) \n------------------------------------------", locEntry );
-    if (locEntry >= NEntriesToProcess) { Debug(0,"Exiting after %d entries", NEntriesToProcess); gSystem->Exit(0); }
+    if (locEntry >= NEntriesToProcess) { Debug(0,"Exiting after %d entries\nDone\n", NEntriesToProcess); gSystem->Exit(0); }
 	return kTRUE;
 }
 
