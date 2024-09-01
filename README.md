@@ -37,6 +37,15 @@ GlueX software help:
 https://groups.google.com/g/gluex-software
 
 
+* Number of out-of-time beam bunches in tree (on a single side, so that total number out-of-time bunches accepted is 2 times this number for left + right bunches) 
+
+    locNumOutOfTimeBunchesInTree = 5; 
+    
+    
+    
+            
+
+
 ### **(2.2.1) Execute DSelector
 
 </ cd /work/hallb/clas12/users/ecohen/halld/GlueX/GlueX_BranchingRatios_Analysis/DSelector/ >
