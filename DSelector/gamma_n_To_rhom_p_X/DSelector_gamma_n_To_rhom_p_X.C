@@ -408,16 +408,16 @@ Bool_t DSelector_gamma_n_To_rhom_p_X::Process(Long64_t locEntry) {
             << std::endl;
         }
         
-//        csvfile.open( csvfilename, std::ios::app );
-//        csvfile
-//        << run_number           << ","
-//        << evt_number           << ","
-//        << entry_number         << ","
-//        << idx_combo            << ","
-//        << E_gamma              << ","
-//        << locDeltaT_RF         << ","
-//        << std::endl;
-//        csvfile.close();
+        csvfile.open( csvfilename, std::ios::app );
+        csvfile
+        << run_number           << ","
+        << evt_number           << ","
+        << entry_number         << ","
+        << idx_combo            << ","
+        << E_gamma              << ","
+        << locDeltaT_RF         << ","
+        << std::endl;
+        csvfile.close();
 
         
 	} // end of combo loop
