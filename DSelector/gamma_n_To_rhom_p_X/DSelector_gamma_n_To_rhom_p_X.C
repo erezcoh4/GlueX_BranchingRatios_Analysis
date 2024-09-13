@@ -32,10 +32,10 @@ void DSelector_gamma_n_To_rhom_p_X::Init(TTree *locTree)
 	dPreviousRunNumber = 0;
 
 	/*********************************** EXAMPLE USER INITIALIZATION: ANALYSIS ACTIONS **********************************/
-    csvfilename = "DSelector_gamma_n_To_rhom_p_X_output.csv" ;
-    csvfile.open( csvfilename );
-    csvfile << csvheader << std::endl;
-    csvfile.close();
+//    csvfilename = "DSelector_gamma_n_To_rhom_p_X_output.csv" ;
+//    csvfile.open( csvfilename );
+//    csvfile << csvheader << std::endl;
+//    csvfile.close();
     
 
 	// EXAMPLE: Create deque for histogramming particle masses:
